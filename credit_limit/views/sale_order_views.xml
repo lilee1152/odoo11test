@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_order_form_inherit_credit_limit"
+		model="ir.ui.view">
+		<field name="name">sale.order.form.inherit.credit.limit</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//h1//field[@name='name']" position="after">
+				<field name="credit_limit_block" invisible="1"/>
+				<span class="badge badge-danger"
+					attrs="{'invisible': [('credit_limit_block','!=',True)]}">Blocked</span>
+				<!-- badge-danger will not displayed as red color in form view, need 
+					to be fixed -->
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_quotation_tree_inherit_credit_limit"
+		model="ir.ui.view">
+		<field name="name">sale.quotation.tree.inherit.credit.limit</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_quotation_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="//tree" position="attributes">
+				<attribute name="decoration-danger">credit_limit_block == True</attribute>
+			</xpath>
+			<field name="state" position="after">
+				<field name="credit_limit_block" invisible="1"/>
+			</field>
+		</field>
+	</record>
+
+</odoo>

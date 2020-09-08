@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <record id="view_partner_form_inherit_credit_limit" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit.credit.limit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="use_credit_limit"/>
+                    <field name="credit_limit" attrs="{'invisible': [('use_credit_limit','!=',True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
